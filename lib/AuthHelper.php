@@ -56,9 +56,11 @@ class AuthHelper
         } else {
             throw new SdkException("HMAC value not found in url parameters.");
         }
-        //signature validation is deprecated
-        if (isset($data['signature'])) {
-            unset($data['signature']);
+        
+        foreach (['rurl','authclient','signature'] as $item) {
+            if (isset($data[$item])) {
+                unset($data[$item]);
+            }
         }
         //Create data string for the remaining url parameters
         $dataString = http_build_query($data);
@@ -119,8 +121,8 @@ class AuthHelper
         }
         // Official call structure
         // https://{shop}.myshopify.com/admin/oauth/authorize?client_id={api_key}&scope={scopes}&redirect_uri={redirect_uri}&state={nonce}&grant_options[]={option}
-        $authUrl = $config['AdminUrl'] . 'oauth/authorize?client_id=' . $config['ApiKey'] . '&redirect_uri=' . $redirectUrl . "&scope=$scopes" . $state . $options;
-
+        //$authUrl = $config['AdminUrl'] . 'oauth/authorize?client_id=' . $config['ApiKey'] . '&redirect_uri=' . $redirectUrl . "&scope=$scopes" . $state . $options;
+        $authUrl = $config['AdminUrl'] . 'oauth/authorize?client_id='.$config['ApiKey']."&scope={$scopes}&redirect_uri={$redirectUrl}". $state . $options;
         if ($return) {
             return $authUrl;
         }
