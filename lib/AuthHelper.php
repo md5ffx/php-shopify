@@ -57,7 +57,7 @@ class AuthHelper
             throw new SdkException("HMAC value not found in url parameters.");
         }
         
-        foreach (['rurl','authclient','signature'] as $item) {
+        foreach (['rurl','authclient','signature','locale','protocol'] as $item) {
             if (isset($data[$item])) {
                 unset($data[$item]);
             }
