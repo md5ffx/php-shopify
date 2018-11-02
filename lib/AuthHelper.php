@@ -62,6 +62,7 @@ class AuthHelper
                 unset($data[$item]);
             }
         }
+        var_dump($data);die;
         //Create data string for the remaining url parameters
         $dataString = http_build_query($data);
 
