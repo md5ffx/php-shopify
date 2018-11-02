@@ -314,7 +314,7 @@ class ShopifySDK
         //Remove https:// and trailing slash (if provided)
         $shopUrl = preg_replace('#^https?://|/$#', '', $shopUrl);
 
-        if(isset(self::$config['ApiKey']) && isset(self::$config['Password'])) {
+        if(0&&isset(self::$config['ApiKey']) && isset(self::$config['Password'])) {
             $apiKey = self::$config['ApiKey'];
             $apiPassword = self::$config['Password'];
             $adminUrl = "https://$apiKey:$apiPassword@$shopUrl/admin/";
